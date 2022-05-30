@@ -34,7 +34,11 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- YOUR CODE -->
+                <?php
+                if(!(empty($transactions))){
+                    echo get_html_table($transactions);
+                }
+                ?>
             </tbody>
             <tfoot>
                 <tr>

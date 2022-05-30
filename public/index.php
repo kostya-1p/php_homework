@@ -8,6 +8,6 @@ define('VIEWS_PATH', $root . 'views' . DIRECTORY_SEPARATOR);
 
 require APP_PATH.'App.php';
 
-echo '<pre>';
-print_r(read_all_csv_files(FILES_PATH));
-echo '</pre>';
+$transactions = (read_all_csv_files(FILES_PATH));
+
+require VIEWS_PATH.'transactions.php';

@@ -1,8 +1,45 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-function read_all_csv_files(string $directory): array {
+define('DATE_INDEX', 0);
+define('CHECK_INDEX', 1);
+define('DESCRIPTION_INDEX', 2);
+define('AMOUNT_INDEX', 3);
+
+function filter_transactions(array $transactions, bool $isExpense): array
+{
+    return array_filter($transactions, fn($row) => str_contains($row[AMOUNT_INDEX], '-') === $isExpense);
+}
+
+function convert_amount_to_float(array $transactions): array
+{
+    return array_map(fn($row) => $row[AMOUNT_INDEX] = floatval($row[AMOUNT_INDEX]), $transactions);
+}
+
+function get_total_income(array $transactions): float
+{
+
+}
+
+function get_html_table(array $tableData): string
+{
+    $htmlTable = '';
+
+    foreach ($tableData as $row) {
+        $htmlTable = $htmlTable . '<tr>';
+        $htmlTable = $htmlTable . '<td>' . $row[DATE_INDEX] . '</td>';
+        $htmlTable = $htmlTable . '<td>' . $row[CHECK_INDEX] . '</td>';
+        $htmlTable = $htmlTable . '<td>' . $row[DESCRIPTION_INDEX] . '</td>';
+        $htmlTable = $htmlTable . '<td>' . $row[AMOUNT_INDEX] . '</td>';
+        $htmlTable = $htmlTable . '</tr>';
+    }
+
+    return $htmlTable;
+}
+
+function read_all_csv_files(string $directory): array
+{
     $dirIterator = new DirectoryIterator($directory);
     $all_data = [];
 
@@ -16,7 +53,8 @@ function read_all_csv_files(string $directory): array {
     return $all_data;
 }
 
-function read_csv_file(string $fileName): array {
+function read_csv_file(string $fileName): array
+{
     $data = [];
 
     if (($handle = fopen($fileName, "r")) !== false) {
@@ -30,6 +68,7 @@ function read_csv_file(string $fileName): array {
     return $data;
 }
 
-function get_line_csv($stream): array|false {
+function get_line_csv($stream): array|false
+{
     return fgetcsv($stream, 1000, ",");
 }
