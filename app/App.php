@@ -55,11 +55,33 @@ function get_html_table(array $tableData): string
         $htmlTable = $htmlTable . '<td>' . convert_date($row[DATE_INDEX]) . '</td>';
         $htmlTable = $htmlTable . '<td>' . $row[CHECK_INDEX] . '</td>';
         $htmlTable = $htmlTable . '<td>' . $row[DESCRIPTION_INDEX] . '</td>';
-        $htmlTable = $htmlTable . '<td>' . $row[AMOUNT_INDEX] . '</td>';
+        $htmlTable = $htmlTable . '<td>' . get_amount_html($row[AMOUNT_INDEX]) . '</td>';
         $htmlTable = $htmlTable . '</tr>';
     }
 
     return $htmlTable;
+}
+
+function get_amount_html(string $amount): string
+{
+    $amountFloat = convert_amount_float($amount);
+    $amount_html = '';
+
+    if ($amountFloat >= 0) {
+        $amount_html = '<span style="color: green;">';
+
+    } else {
+        $amount_html = '<span style="color: red;">';
+    }
+
+    $amount_html .= $amount;
+    $amount_html .= '</span>';
+    return $amount_html;
+}
+
+function convert_amount_float(string $amount): float
+{
+    return (float)str_replace(['$', ','], '', $amount);
 }
 
 function convert_date(string $oldDate): string
