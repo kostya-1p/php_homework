@@ -19,7 +19,8 @@ $router = new Router();
 
 $router
     ->get('/', [HomeController::class, 'index'])
-    ->get('/upload', [\App\Controllers\FileUploadController::class, 'index']);
+    ->get('/select', [\App\Controllers\FileUploadController::class, 'index'])
+    ->post('/upload', [\App\Controllers\FileUploadController::class, 'upload']);
 
 (new App(
     $router,

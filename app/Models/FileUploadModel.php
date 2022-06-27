@@ -4,11 +4,29 @@ namespace App\Models;
 
 use App\Model;
 
+define('DATE_INDEX', 0);
+define('CHECK_INDEX', 1);
+define('DESCRIPTION_INDEX', 2);
+define('AMOUNT_INDEX', 3);
+
 class FileUploadModel extends Model
 {
-    private function insertData()
+    public function upload(string $fileName, HandleTransactionsModel $handleModel)
     {
+        $unhandledTransactions = $this->readCsvFile($fileName);
+        $handledTransactions = $handleModel->handleTransactions($unhandledTransactions);
+        $this->insertData($handledTransactions);
+    }
 
+    private function insertData(array $transactions)
+    {
+        $query = "INSERT INTO transactions (date, check_num, description, amount)
+                  VALUES (:date, :check_num, :desription, :amount);";
+        $stmt = $this->db->prepare($query);
+
+        foreach ($transactions as $transaction) {
+            $stmt->execute([$transaction[DATE_INDEX], $transaction[CHECK_INDEX], $transaction[DESCRIPTION_INDEX], $transaction[AMOUNT_INDEX]]);
+        }
     }
 
     private function getLineCsv($stream): array|false
