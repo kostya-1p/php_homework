@@ -22,7 +22,7 @@ class DB
 
         try {
             $this->pdo = new PDO(
-                $config['driver'] . ':host=' . $config['host'] . ';dbname=' . $config['database'],
+                'mysql:host=' . $config['host'] . ';dbname=' . $config['database'],
                 $config['user'],
                 $config['pass'],
                 $config['options'] ?? $defaultOptions

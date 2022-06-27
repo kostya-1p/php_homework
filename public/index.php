@@ -18,7 +18,8 @@ define('VIEW_PATH', __DIR__ . '/../views');
 $router = new Router();
 
 $router
-    ->get('/', [HomeController::class, 'index']);
+    ->get('/', [HomeController::class, 'index'])
+    ->get('/upload', [\App\Controllers\FileUploadController::class, 'index']);
 
 (new App(
     $router,
