@@ -35,18 +35,21 @@ class HomeController
         return $this->handleModel->getHtmlTable($this->transactions);
     }
 
-    public function getTotalIncome(): float
+    public function getTotalIncome(): string
     {
-        return $this->handleModel->getTotalIncome($this->transactions);
+        $totalFloat = $this->handleModel->getTotalIncome($this->transactions);
+        return $this->handleModel->formatDollarAmount($totalFloat);
     }
 
-    public function getTotalExpense(): float
+    public function getTotalExpense(): string
     {
-        return $this->handleModel->getTotalExpense($this->transactions);
+        $totalFloat = $this->handleModel->getTotalExpense($this->transactions);
+        return $this->handleModel->formatDollarAmount($totalFloat);
     }
 
-    public function getTotalNet(): float
+    public function getTotalNet(): string
     {
-        return $this->handleModel->getNetTotal($this->transactions);
+        $totalFloat = $this->handleModel->getNetTotal($this->transactions);
+        return $this->handleModel->formatDollarAmount($totalFloat);
     }
 }

@@ -32,7 +32,8 @@ class HandleTransactionsModel
         foreach ($tableData as $row) {
             $htmlTable = $htmlTable . '<tr>';
             $htmlTable = $htmlTable . '<td>' . $row['date'] . '</td>';
-            $htmlTable = $htmlTable . '<td>' . $row['check_num'] . '</td>';
+            $checkNumString = $row['check_num'] == NULL ? ' ' : $row['check_num'];
+            $htmlTable = $htmlTable . '<td>' . $checkNumString . '</td>';
             $htmlTable = $htmlTable . '<td>' . $row['description'] . '</td>';
             $htmlTable = $htmlTable . '<td>' . $this->getAmountHtml($row['amount']) . '</td>';
             $htmlTable = $htmlTable . '</tr>';
@@ -57,7 +58,7 @@ class HandleTransactionsModel
         return $amount_html;
     }
 
-    private function formatDollarAmount(float $amount): string
+    public function formatDollarAmount(float $amount): string
     {
         $isNegative = $amount < 0;
 

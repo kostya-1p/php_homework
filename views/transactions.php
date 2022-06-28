@@ -2,7 +2,13 @@
 <html>
     <head>
         <title>Transactions</title>
+        <link rel="stylesheet" href="homeStyle.css">
         <style>
+            .btn{
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -24,6 +30,10 @@
         </style>
     </head>
     <body>
+        <form action="/select" method="get" enctype="multipart/form-data">
+            <input type="submit" class="btn" value="Upload new CSV file">
+        </form>
+
         <table>
             <thead>
                 <tr>

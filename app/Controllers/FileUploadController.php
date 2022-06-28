@@ -16,11 +16,14 @@ class FileUploadController
     public function upload()
     {
         $filePath = $_FILES['table']['tmp_name'];
+        if(empty($filePath)){
+            header("Location: /select");
+        } else {
+            $uploadModel = new FileUploadModel();
+            $handleModel = new HandleTransactionsModel();
+            $uploadModel->upload($filePath, $handleModel);
 
-        $uploadModel = new FileUploadModel();
-        $handleModel = new HandleTransactionsModel();
-        $uploadModel->upload($filePath, $handleModel);
-
-        header("Location: /");
+            header("Location: /");
+        }
     }
 }
