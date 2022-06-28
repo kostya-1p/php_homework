@@ -20,5 +20,7 @@ class FileUploadController
         $uploadModel = new FileUploadModel();
         $handleModel = new HandleTransactionsModel();
         $uploadModel->upload($filePath, $handleModel);
+
+        header("Location: /");
     }
 }

@@ -34,20 +34,34 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- TODO -->
+                <?php
+                echo $this->params[0];
+                ?>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- TODO --></td>
+                    <td>
+                        <?php
+                        echo $this->params[1];
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- TODO --></td>
+                    <td>
+                        <?php
+                        echo $this->params[2];
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- TODO --></td>
+                    <td>
+                        <?php
+                        echo $this->params[3];
+                        ?>
+                    </td>
                 </tr>
             </tfoot>
         </table>
