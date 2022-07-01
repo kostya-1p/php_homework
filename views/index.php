@@ -11,7 +11,7 @@
                 margin-bottom: 20px;
             }
         </style>
-        <title>Document</title>
+        <title>Transactions</title>
     </head>
     <body>
         <form action="/select" method="get" enctype="multipart/form-data">
